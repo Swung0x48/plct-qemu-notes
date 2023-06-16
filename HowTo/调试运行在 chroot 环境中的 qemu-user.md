@@ -45,3 +45,5 @@ mask ffffffffffffff00fffffffffffffffffeffffff
 (gdb) target remote localhost:1234
 # 此时已经开始 remote debug 了
 ```
+
+Credits: (@mochaaP)[https://github.com/mochaaP] 呜呜呜抹茶茶我的抹茶茶
