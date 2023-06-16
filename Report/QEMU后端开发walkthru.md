@@ -47,13 +47,13 @@ tcg-target-con-str.h; the constraint combination is inclusive or.
 这一步是最重要的一步，也是最复杂的一步。
 首先需要补全所有已经声明了的 TCG ops 对应的函数（形如 `void tcg_out_op_xxx(TCGContext *s, ...)` 的函数）。你要做的事情是，首先查阅 QEMU 的文档，了解这个 TCG ops 的功能，然后根据这个功能，将其翻译成对应的 host code。你可以通过 `tcg_outxxx()` 函数来输出 host code。在 RISC-V 中用的最多的是 `tcg_out32`，因为 RISC-V 的指令长度通常是 32 位的长度。
 
-所以其实是需要我们自己来拼出每个指令对应的二进制编码的！这时候就需要翻阅 RISC-V 的手册了。RISC-V 的手册可以在这里找到：https://riscv.org/specifications/，在这里，我们需要查阅 RISC-V 的指令集手册，来了解每个指令的二进制编码。或者，也可以 https://wiki.riscv.org/display/HOME/Recently+Ratified+Extensions 在这里查阅需要使用到的扩展相关的信息。建议随手备着一张 RISC-V 指令集的表格或者正在使用的扩展的 spec pdf，方便查阅。
+所以其实是需要我们自己来拼出每个指令对应的二进制编码的！这时候就需要翻阅 [RISC-V 的手册了](https://riscv.org/specifications/)。我们可以通过翻阅手册来了解每个指令的二进制编码。或者，也可以在[这里](https://wiki.riscv.org/display/HOME/Recently+Ratified+Extensions)查阅需要使用到的扩展相关的信息。建议随手备着一张 RISC-V 指令集的表格或者正在使用的扩展的 spec pdf，方便查阅。
 
 需要检验自己的是否正确，可以通过给 QEMU 添加 `-d out_asm` 参数来查看 QEMU 的输出，看看自己的指令是否正确。需要注意的是，输出默认会输出到 `stderr`，有必要的话可以通过 `-D` 参数来指定输出的文件，或者通过 `2>` 来重定向输出（比如 `2>&1` 重定向到 `stdout`）。也可以通过比对 godbolt.org 或者直接写一个对应指令的程序并通过 `objdump` 比对，来查看自己的编码的实现是否正确。https://github.com/Swung0x48/riscv-insn-playground 这个仓库里面是一个非常简单的测试环境，可以用来快速开始编写和测试 RISC-V 的汇编程序。
 
 4. 运行和调试
 
 最后的最后，你需要将你的后端编译进 QEMU 中，然后运行 QEMU 来测试你的后端是否正确。
-如果出现了任何运行时的问题需要调试，可以通过 `gdb` 来调试 QEMU。如果你很不幸需要和我一样，测试的后端没有直接的硬件支持，那可能需要一个 QEMU-on-QEMU 的环境。调试环境配置的方法可以参考[这里](../HowTo/调试运行在 chroot 环境中的 qemu-user.md)。
+如果出现了任何运行时的问题需要调试，可以通过 `gdb` 来调试 QEMU。如果你很不幸需要和我一样，测试的后端没有直接的硬件支持，那可能需要一个 QEMU-on-QEMU 的环境。调试环境配置的方法可以参考[这里](https://github.com/Swung0x48/plct-qemu-notes/blob/master/HowTo/调试运行在%20chroot%20环境中的%20qemu-user.md)。
 
 掌握了以上这些，我想你应该可以开始为 QEMU/TCG 后端贡献代码了。祝你好运！
