@@ -46,4 +46,4 @@ mask ffffffffffffff00fffffffffffffffffeffffff
 # 此时已经开始 remote debug 了
 ```
 
-Credits: (@mochaaP)[https://github.com/mochaaP] 呜呜呜抹茶茶我的抹茶茶
+Credits: [@mochaaP](https://github.com/mochaaP) 呜呜呜抹茶茶我的抹茶茶

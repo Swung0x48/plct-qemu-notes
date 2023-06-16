@@ -54,6 +54,6 @@ tcg-target-con-str.h; the constraint combination is inclusive or.
 4. 运行和调试
 
 最后的最后，你需要将你的后端编译进 QEMU 中，然后运行 QEMU 来测试你的后端是否正确。
-如果出现了任何运行时的问题需要调试，可以通过 `gdb` 来调试 QEMU。如果你很不幸需要和我一样，测试的后端没有直接的硬件支持，那可能需要一个 QEMU-on-QEMU 的环境。调试环境配置的方法可以参考(这里)[../HowTo/调试运行在 chroot 环境中的 qemu-user.md]。
+如果出现了任何运行时的问题需要调试，可以通过 `gdb` 来调试 QEMU。如果你很不幸需要和我一样，测试的后端没有直接的硬件支持，那可能需要一个 QEMU-on-QEMU 的环境。调试环境配置的方法可以参考[这里](../HowTo/调试运行在 chroot 环境中的 qemu-user.md)。
 
 掌握了以上这些，我想你应该可以开始为 QEMU/TCG 后端贡献代码了。祝你好运！
