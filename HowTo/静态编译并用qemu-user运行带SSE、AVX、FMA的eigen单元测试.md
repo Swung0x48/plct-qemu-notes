@@ -1,3 +1,5 @@
+要用 SSE/AVX 来测试 qemu 后端 V 扩展的实现正确性，可以借用 eigen 的单元测试。
+
 参考 [Tests - eigen](https://eigen.tuxfamily.org/index.php?title=Tests)
 
 编译
@@ -17,9 +19,9 @@ cmake .. \
     -DEIGEN_TEST_SSSE3=ON \
     -DEIGEN_TEST_SSE4_1=ON \
     -DEIGEN_TEST_SSE4_2=ON \
-    -DEIGEN_TEST_FMA=ON # 在test里打开各种 SSE/AVX/FMA 的支持
+    -DEIGEN_TEST_FMA=ON # 对 SSE/AVX/FMA 跑测试
 
-make test -j$(nproc)
+make check -j$(nproc) # 编译并且跑一遍测试，确保在 x86 物理机上编译的测试没问题
 ```
 
 检查并运行一个 test
@@ -31,4 +33,4 @@ ldd basicstuff_2
 /path/to/qemu-x86_64 -cpu EPYC basicstuff_2
 ```
 
-（还不知道怎么批量运行测试，感觉应该是改一下 cmake 就可以了，搜 `add_test()` 函数然后魔改一下命令用 qemu 跑，但我没测试过，等后人踩坑吧
+（还不知道怎么批量运行测试，现在是很脏的直接一个 shell 把能跑的都跑一下，但感觉应该是改一下 cmake 就可以了，搜 `add_test()` 函数然后魔改一下命令用 qemu 跑，但我没测试过，等后人踩坑吧
