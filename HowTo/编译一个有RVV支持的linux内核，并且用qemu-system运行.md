@@ -13,7 +13,7 @@ make menuconfig
 ```
 make ARCH=riscv CROSS_COMPILE=riscv64-linux-gnu- -j$(nproc)
 ```
-编译完了以后生成 `vmlinux`
+编译完了以后内核会在 `arch/riscv/boot/Image` 里
 
 要使用新编译好的内核启动的话，首先你需要一个完整的可以用 qemu-system 启动的 linux 系统（我用的是这个 [archriscv-scriptlet](https://github.com/CoelacanthusHex/archriscv-scriptlet.git)），然后可以将启动脚本改为下面的脚本
 ```
